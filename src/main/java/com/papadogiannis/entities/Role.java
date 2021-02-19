@@ -25,4 +25,13 @@ public class Role implements Serializable {
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Set<Account> accounts;
+
+    public Role(String type) {
+        this.type = type;
+    }
+
+    public Role(Long roleId, String type) {
+        this.roleId = roleId;
+        this.type = type;
+    }
 }

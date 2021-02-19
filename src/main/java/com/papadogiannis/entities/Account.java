@@ -44,16 +44,34 @@ public class Account implements Serializable {
     @JoinColumn(name="role_id")
     private Role role;
 
-    @OneToMany(mappedBy = "account",cascade = CascadeType.ALL)
-    private Set<SendEmail> sentEmails;
-
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name="account_id"),
-            inverseJoinColumns = @JoinColumn(name="receive_email_id"))
-    private Set<ReceiveEmail> receivedEmails;
+            inverseJoinColumns = @JoinColumn(name="email_id"))
+    private Set<Email> emails;
 
+    public Account(String firstName, String lastName,
+                   Date dateOfBirth, String gender,
+                   String password, String email, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
 
-
-
+    public Account(String firstName, String lastName,
+                   Date dateOfBirth, String gender,
+                   String password, String email, Role role, Set<Email> emails) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.emails = emails;
+    }
 }
